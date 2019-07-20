@@ -8,7 +8,6 @@ app = Flask(__name__)
 # app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-
 books = [
     {'id': 0,
      'title': 'A Fire Upon the Deep',
@@ -27,27 +26,13 @@ books = [
      'published': '1975'}
 ]
 
-#
-# @app.route('/test', methods=['GET'])
-# def home():
-#     return '''<h1>Distant Reading Archive</h1>
-# <p>A prototype API for distant reading of science fiction novels.</p>'''
-#
-
 # A route to return all of the available entries in our catalog.
 @app.route('/api/v1/resources/books/all', methods=['GET'])
 def api_all():
     return jsonify(books)
 
-
-
-
 # A POST route to receive webhooks from Buildkite
 # from flask import Flask, request, abort
-
-app = Flask(__name__)
-
-
 @app.route('/', methods=['POST'])
 def webhook():
     print("webhook"); sys.stdout.flush()
@@ -56,7 +41,6 @@ def webhook():
         return '', 200
     else:
         abort(400)
-
 
 if __name__ == '__main__':
     app.run()

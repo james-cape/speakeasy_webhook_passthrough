@@ -7,6 +7,8 @@ To make the flask server visible to the outside world, NGROK:
 1. Install NGROK
 1. Make sure local host server is running
 1. Run `$ ./ngrok http 5000` from home directory
+
+To trigger the Buildkite webhook and send a POST to this Flask app:
 1. Copy `http://8585EXAMPLE8585.ngrok.io` from ngrok server
 1. Paste that into buildkite.com -> select group -> settings -> notifications services -> Webhook (add if necessary) -> webhook url field (add a '/') at the end
 1. Select `build.running` and `build.finished`
