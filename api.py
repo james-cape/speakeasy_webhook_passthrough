@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import jsonify
 from flask import request
+from flask import abort
+import sys
 app = Flask(__name__)
 
 # app = flask.Flask(__name__)
@@ -25,16 +27,36 @@ books = [
      'published': '1975'}
 ]
 
-
-@app.route('/', methods=['GET'])
-def home():
-    return '''<h1>Distant Reading Archive</h1>
-<p>A prototype API for distant reading of science fiction novels.</p>'''
-
+#
+# @app.route('/test', methods=['GET'])
+# def home():
+#     return '''<h1>Distant Reading Archive</h1>
+# <p>A prototype API for distant reading of science fiction novels.</p>'''
+#
 
 # A route to return all of the available entries in our catalog.
 @app.route('/api/v1/resources/books/all', methods=['GET'])
 def api_all():
     return jsonify(books)
 
-app.run()
+
+
+
+# A POST route to receive webhooks from Buildkite
+# from flask import Flask, request, abort
+
+app = Flask(__name__)
+
+
+@app.route('/', methods=['POST'])
+def webhook():
+    print("webhook"); sys.stdout.flush()
+    if request.method == 'POST':
+        print(request.json)
+        return '', 200
+    else:
+        abort(400)
+
+
+if __name__ == '__main__':
+    app.run()
