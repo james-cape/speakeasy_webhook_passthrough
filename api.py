@@ -3,10 +3,19 @@ from flask import jsonify
 from flask import request
 from flask import abort
 import sys
-app = Flask(__name__)
 
-# app = flask.Flask(__name__)
+app = Flask(__name__)
 app.config["DEBUG"] = True
+
+# A POST route to receive webhooks from Buildkite
+@app.route('/', methods=['POST'])
+def webhook():
+    print("webhook"); sys.stdout.flush()
+    if request.method == 'POST':
+        print(request.json)
+        return '', 200
+    else:
+        abort(400)
 
 books = [
     {'id': 0,
@@ -30,17 +39,6 @@ books = [
 @app.route('/api/v1/resources/books/all', methods=['GET'])
 def api_all():
     return jsonify(books)
-
-# A POST route to receive webhooks from Buildkite
-# from flask import Flask, request, abort
-@app.route('/', methods=['POST'])
-def webhook():
-    print("webhook"); sys.stdout.flush()
-    if request.method == 'POST':
-        print(request.json)
-        return '', 200
-    else:
-        abort(400)
 
 if __name__ == '__main__':
     app.run()
