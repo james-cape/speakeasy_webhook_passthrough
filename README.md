@@ -14,3 +14,6 @@ To trigger the Buildkite webhook and send a POST to this Flask app:
 1. Select `build.running` and `build.finished`
 1. Select `Save Notification Settings`
 1. Submit Github PR and merge. The merge will trigger a Buildkite Heroku build. The Buildkite Heroku build will trigger a webhook to this Flask app.
+
+To see the commit/merge info in rails (and eventually save to a database):
+1. put a pry in webhooks#index and make a github merge
