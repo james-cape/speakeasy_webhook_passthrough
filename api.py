@@ -14,10 +14,10 @@ app.config["DEBUG"] = True
 def webhook_input():
     print("webhook"); sys.stdout.flush()
     if request.method == 'POST':
-        print(request.get_json())
+        # print(request.get_json())
 
         requests.get(
-            'http://localhost:3000/api/v1/webhooks_test',
+            'https://dashboard.heroku.com/apps/arrogant-loon-34609/api/v1/webhooks_test',
             params={
                 'build_status': request.get_json()['event'],
                 'build_state': request.get_json()['build']['state'],
